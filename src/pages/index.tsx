@@ -21,16 +21,15 @@ export default function Home() {
     })
   }, []);
 
+  // Save favorites to local storage so that we can keep them when we refresh the page
   useEffect(() => {
-    // end if
     if (!fetched) return;
-    console.log('storing in local', favoriteMovies)
     window.localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
   }, [favoriteMovies]);
 
   // fetch movies from the API
   const fetchMovies = async () => {
-    axios.get('/api/movies').then((response) => {
+    axios.get('/api/movies?count=40').then((response) => {
       const movies = response.data
       setMovies(movies);
     });
@@ -60,6 +59,7 @@ export default function Home() {
       <header className={styles.header}>
         <h1>Movie Carousel</h1>
       </header>
+
       <main className={styles.main}>
         <div className={styles.carouselrow}>
           <h2>Movies</h2>

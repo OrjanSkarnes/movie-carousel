@@ -17,12 +17,11 @@ export default async function handler(
   /// There is a limit of 10 movies per page in the api response
   const pages = Math.ceil(Number(count) / 10);
   
-  let promises = Array.from({ length: pages }, (_, i) => i + 1).map(i => {
+  let promises = Array.from({ length: pages }, (_, i) => i + 1).map(_i => {
     const random = Math.floor(Math.random() * 40) + 1;
     const cacheKey = generateCacheKey(search as string, random);
 
     if (movieCache[cacheKey]) {
-      console.log('Cache hit')
       return Promise.resolve({ data: { Search: movieCache[cacheKey] } });
     }
 
@@ -32,7 +31,7 @@ export default async function handler(
         return response;
       });
   });
-  // Wait for all promises to resolve
+  // Wait for all promises to resolve can also fail but we only care about the fulfilled ones
   await Promise.allSettled(promises)
     .then(results => {
       results.forEach(result => {

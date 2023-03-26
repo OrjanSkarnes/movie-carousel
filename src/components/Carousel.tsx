@@ -62,9 +62,10 @@ const Carousel: React.FC<CarouselProps> = ({ movies, favoriteMovies, onToggleFav
     setIsDragging(false); // Set dragging state to false when mouse button is released
   };
 
+
+  // Function to calculate the width of the card based on the width of the screen
   const calculatedWidth = () => {
     const width = window.innerWidth;
-    console.log(width)
     if (width < 480) {
       setCardWidthInPixels(165); // Card width (150px) + margin-inline (15px)
     } else if (width < 768) {
@@ -76,13 +77,13 @@ const Carousel: React.FC<CarouselProps> = ({ movies, favoriteMovies, onToggleFav
 
   const smoothScrollToNearestCard = () => {
     calculatedWidth()
-    if (carouselRef.current) { // Card width (270px) + margin-inline (30px)
+    if (carouselRef.current && cardWidthInPixels > 0) { // Card width (270px) + margin-inline (30px)
       const currentScroll = carouselRef.current.scrollLeft;
       let nearestCard;
       if (scrollDirection === 'left') {
-        nearestCard = Math.ceil(currentScroll / cardWidthInPixels);
+        nearestCard = Math.ceil(currentScroll / cardWidthInPixels); // Calculate the nearest to the right
       } else {
-        nearestCard = Math.floor(currentScroll / cardWidthInPixels);
+        nearestCard = Math.floor(currentScroll / cardWidthInPixels); // Calculate the nearest card to the left when scrolling 
       }
       // Smoothly scroll to the nearest card
       carouselRef.current.scrollTo({
@@ -97,10 +98,11 @@ const Carousel: React.FC<CarouselProps> = ({ movies, favoriteMovies, onToggleFav
     e.preventDefault(); // Prevent default browser behavior
     const x = e.pageX - carouselRef.current!.offsetLeft; // Calculate new cursor position on the x axis
     const scrollDistance = (x - startPosition) * 1.5; // Calculate scroll distance based on cursor position and initial cursor position
-    setScrollDirection(scrollDistance > 0 ? 'right' : 'left')
+    setScrollDirection(scrollDistance > 0 ? 'right' : 'left') // Set scroll direction based on scroll distance
     carouselRef.current!.scrollLeft = initialScrollLeft - scrollDistance; // Update scroll position based on scroll distance
   };
 
+  // Handle keyboard events
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') e.preventDefault();
     if (e.key === 'ArrowLeft') {
