@@ -70,6 +70,12 @@
   transition: all 0.3s;
 
   &:hover {
+    background-color: darken($color: #2c3e50, $amount: 10%);
     transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
+    background-color: darken($color: #2c3e50, $amount: 20%);
   }
 }
