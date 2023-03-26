@@ -22,7 +22,7 @@ yarn dev
 pnpm dev
 ```
 
-set the env key so you can fetch movies, can be found in .env file
+Set OMDB API key so you can fetch movies from the api, needs to be added in .env file, can get one [here](https://www.omdbapi.com/apikey.aspx)
 
 ```
 OMDB_API_KEY=your_api_key
