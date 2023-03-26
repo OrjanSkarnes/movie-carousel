@@ -71,7 +71,7 @@ const Carousel: React.FC<CarouselProps> = ({ movies, favoriteMovies, onToggleFav
     } else if (width < 768) {
       setCardWidthInPixels(220); // Card width (200px) + margin-inline (20px)
     } else {
-      setCardWidthInPixels(295); // Card width (270px) + margin-inline (25px)
+      setCardWidthInPixels(275); // Card width (250px) + margin-inline (25px)
     }
   }
 
