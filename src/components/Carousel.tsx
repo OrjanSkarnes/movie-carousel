@@ -48,6 +48,7 @@ const Carousel: React.FC<CarouselProps> = ({ movies, favoriteMovies, onToggleFav
   // Event handlers for drag-based scrolling
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true); // Set dragging state to true
+    // Should only set is dragging when mose is clicked and mouse is moviing in a direction after the click    setIsDragging(true); // Set dragging state to true
     setStartPosition(e.pageX - carouselRef.current!.offsetLeft); // Record initial cursor position
     setInitialScrollLeft(carouselRef.current!.scrollLeft); // Record initial scroll position
   };

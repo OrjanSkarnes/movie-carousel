@@ -70,7 +70,7 @@ export default function Home() {
 
         {favoriteMovies && favoriteMovies.length > 0 && (
           <div className={styles.carouselrow}>
-            <h2>Favoirte movies</h2>
+            <h2>Favorite movies</h2>
             <Carousel movies={favoriteMovies} favoriteMovies={favoriteMovies} onToggleFavorite={toggleFavoriteMovie} />
           </div>
         )}
